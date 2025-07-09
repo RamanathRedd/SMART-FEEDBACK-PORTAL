@@ -1,0 +1,89 @@
+.login {
+  display: flex;
+  height: 100vh;
+}
+
+.login img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.login-image {
+  width: 70%;
+}
+
+.login-container {
+  width: 30%;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.login-title {
+  margin-bottom: 30px;
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+span{
+  color: red;
+}
+
+
+.submit-btn,
+.not-allow-btn {
+  width: 100%; 
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.not-allow-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+
+
+.register-link{
+  text-align: center;
+  padding-top: 10px;
+}
+
+.register-link a {
+  position: relative;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.register-link a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.register-link a:hover::after {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
