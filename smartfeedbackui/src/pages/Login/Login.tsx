@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import imgPath from "../../common/images/login-regitser.jpg";
 import { useNavigate } from "react-router-dom";
-import { error } from "console";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -90,9 +90,16 @@ const Login: React.FC = () => {
           PassWord: loggedData.password,
         }
       );
-      console.log("response", response);
-    } catch (error) {
-      console.log("Login Error:", error);
+      toast.success("Login successful! 🎉");
+      console.log(response);
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        toast.error("User not found. Please register first.");
+      } else if (error.response?.status === 401) {
+        toast.error("Invalid credentials. Please try again.");
+      } else {
+        toast.error("Something went wrong. Please try later.");
+      }
     }
   }
 };

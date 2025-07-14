@@ -3,7 +3,6 @@ import "../Register/Register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ToastProvider from "../../common/modals/ToastProvider";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Register: React.FC = () => {
 
   return (
     <>
-      {/* <ToastProvider></ToastProvider> */}
       <div className="register">
         <div className="register-container">
           <h2 className="register-title">Create Account</h2>
@@ -138,14 +136,18 @@ const Register: React.FC = () => {
   async function registeredData(e: any) {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:5112/api/users/register",
         registerData
       );
       toast.success("Registration successful! 🎉");
       login();
     } catch (error: any) {
-      console.error("Registration Error:", error);
+      if (error.response?.status === 400) {
+        toast.error("User already exists or invalid data.");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
     }
   }
 
