@@ -1,0 +1,135 @@
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2); 
+}
+
+span{
+  color: red;
+}
+
+.register-container {
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9); 
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 14px;
+}
+
+input,select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-color: #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+select{
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+input:focus,select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 6px rgba(102, 126, 234, 0.5);
+  outline: none;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 14px;
+  margin:  0  5px;
+  padding: 2px;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: #667eea;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.submit-btn:hover {
+  background: #5a67d8; 
+  transform: scale(1.05);
+}
+
+.not-allow-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #444;
+}
+
+.login-link a {
+  position: relative;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-link a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
