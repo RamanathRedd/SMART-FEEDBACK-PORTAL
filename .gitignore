@@ -1,0 +1,101 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+
+
+
+# Build directories
+node_modules/
+dist/
+dist-ssr/
+*.local
+bin/
+obj/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.dll
+*.db
+
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ASP.NET specific
+*.vs/
+.vscode/
+
+# Build Results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Rider IDE
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Logs
+*.log
+
+# Entity Framework
+Migrations/
+
+# SQLite (optional if not to be tracked)
+SmartFeedbackPortal.db
+SmartFeedbackPortal.db-shm
+SmartFeedbackPortal.db-wal
+
+# HTTP Client history
+*.http
+
+# Secrets (optional)
+appsettings.Development.json
+
+# Secrets
+secrets.json
+
+#me
+
+*.ps1
