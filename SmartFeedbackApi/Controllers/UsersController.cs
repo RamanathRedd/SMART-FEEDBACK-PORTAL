@@ -50,7 +50,7 @@ namespace SmartFeedbackPortalAPI.Controllers
             var hashedPassword = HashPassword(loginDto.Password);
             if (hashedPassword != user.Password)
             {
-                return BadRequest("Invalid credentials");
+                return Unauthorized("Invalid credentials");
             }
 
             return Ok(new
