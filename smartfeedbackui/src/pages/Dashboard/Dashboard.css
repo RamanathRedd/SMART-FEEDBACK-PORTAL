@@ -1,0 +1,56 @@
+/* Overall container for the entire app */
+.app-container {
+  display: flex;
+  flex-direction: column;  /* Stack navbar on top, content below */
+  height: 100vh;  /* Full viewport height */
+}
+
+/* Navbar stays at the top */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  z-index: 1000;  /* Ensures navbar stays on top */
+}
+
+/* Main content area - flex to position FeedbackHistory and SubmitFeedback */
+.main-content {
+  display: flex;
+  justify-content: space-between;  /* Position components on opposite sides */
+  flex-grow: 1;  /* Allows the content to take the remaining space */
+  padding: 20px;
+  gap: 20px;  /* Adds space between the components */
+}
+
+/* FeedbackHistory will be on the left */
+.feedback-history {
+  width: 30%;  /* Adjust the width of FeedbackHistory */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* SubmitFeedback will be on the right */
+.submit-feedback {
+  width: 30%;  /* Adjust the width of SubmitFeedback */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Adjust layout for smaller screens */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;  /* Stack components vertically on smaller screens */
+  }
+
+  .feedback-history,
+  .submit-feedback {
+    width: 100%;  /* Full width for both components */
+    margin-bottom: 20px;  /* Add some space between stacked components */
+  }
+}
