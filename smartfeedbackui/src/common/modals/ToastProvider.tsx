@@ -10,6 +10,7 @@ const ToastProvider: React.FC<any> = ({ children }) => {
           position="top-right"
           autoClose={3000}
           aria-label="Notification container"
+          pauseOnHover={false}
         />
       </div>
     </>

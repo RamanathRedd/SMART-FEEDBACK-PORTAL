@@ -4,10 +4,11 @@ import imgPath from "../../common/images/login-regitser.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LoginData } from "./Login.types";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const [loggedData, setLoggedData] = useState({
+  const [loggedData, setLoggedData] = useState<LoginData>({
     userName: "",
     password: "",
   });
@@ -91,6 +92,7 @@ const Login: React.FC = () => {
         }
       );
       toast.success("Login successful! 🎉");
+      navigate("/home");
       console.log(response);
     } catch (error: any) {
       if (error.response?.status === 404) {

@@ -3,10 +3,11 @@ import "../Register/Register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { RegisterData } from "./Register.types";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [registerData, setRegisterData] = useState({
+  const [registerData, setRegisterData] = useState<RegisterData>({
     name: "",
     gender: "",
     email: "",
