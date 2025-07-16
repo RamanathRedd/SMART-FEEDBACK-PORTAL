@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { SubmitFeedbackData } from "./SubmitFeedback.types";
 import axios from "axios";
+import { Modal } from "bootstrap";
+import ConfirmationModal from "../../common/modals/ConfirmationModal";
 import { toast } from "react-toastify";
-import VerticalCenteredModal from "../../common/modals/VerticalCenteredModal";
 
 const SubmitFeedback: React.FC = () => {
   const categories = [
@@ -33,6 +34,11 @@ const SubmitFeedback: React.FC = () => {
     heading: "",
     category: -1,
     subCategory: -1,
+    feedback: "",
+  });
+  const [mappedFeedbackData, setMappedFeedbackData] = useState({
+    category: "",
+    subCategory: "",
     feedback: "",
   });
 
@@ -103,47 +109,60 @@ const SubmitFeedback: React.FC = () => {
             type="submit"
             className={checkEnteredData() ? "not-allow-btn" : "submit-btn"}
             disabled={checkEnteredData()}
-            data-bs-target="#staticBackdrop"
-            data-bs-toggle="modal"
           >
             Submit
           </button>
         </form>
       </div>
-      <VerticalCenteredModal></VerticalCenteredModal>
+      <ConfirmationModal
+        feedbackData={mappedFeedbackData}
+        onConfirm={confirmedFeedback}
+      />
     </>
   );
 
-  async function submittedFeedback(e: any) {
+  function submittedFeedback(e: any) {
     e.preventDefault();
+    const displayData = {
+      heading: feedbackData.heading,
+      category:
+        categories.find((item) => item.id === Number(feedbackData.category))
+          ?.name || "",
+      subCategory:
+        subCategories[Number(feedbackData.category)]?.find(
+          (item) => item.id === Number(feedbackData.subCategory)
+        )?.name || "",
+      feedback: feedbackData.feedback,
+    };
+    setMappedFeedbackData({
+      category: displayData.category,
+      subCategory: displayData.subCategory,
+      feedback: displayData.feedback,
+    });
+    const modalElement = document.getElementById("confirmationModal");
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  async function confirmedFeedback() {
     try {
-      // console.log({
-      //   ...feedbackData,
-      //   category: categories.find(
-      //     (item) => item.id === Number(feedbackData.category)
-      //   )?.name,
-      //   subCategory: subCategories[Number(feedbackData.category)].find(
-      //     (item) => item.id === Number(feedbackData.subCategory)
-      //   )?.name,
-      // });
       await axios.post("http://localhost:5112/api/feedback", {
         ...feedbackData,
         FeedbackText: feedbackData.feedback,
-        category: categories.find(
-          (item) => item.id === Number(feedbackData.category)
-        )?.name,
-        subCategory: subCategories[Number(feedbackData.category)].find(
-          (item) => item.id === Number(feedbackData.subCategory)
-        )?.name,
+        category: mappedFeedbackData.category,
+        subCategory: mappedFeedbackData.subCategory,
       });
-      // toast.success("Registration successful! 🎉");
+      setFeedbackData({
+        heading: "",
+        category: -1,
+        subCategory: -1,
+        feedback: "",
+      });
+      toast.success("Feedback submitted successful! 🎉");
     } catch (error: any) {
-      // if (error.response?.status === 400) {
-      //   toast.error("User already exists or invalid data.");
-      // } else {
-      //   toast.error("Registration failed. Please try again.");
-      // }
-      console.log("Feedback Error:", error);
+      toast.error("Something went wrong. Please try again.");
     }
   }
 

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { FaUserAlt, FaUserCircle } from "react-icons/fa"; // Importing user icon
+import React from "react";
 import "./AppNavbar.css";
 
 const AppNavbar: React.FC = () => {
