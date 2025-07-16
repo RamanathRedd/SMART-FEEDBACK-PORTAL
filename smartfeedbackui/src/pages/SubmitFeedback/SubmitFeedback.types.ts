@@ -1,6 +1,6 @@
 export type SubmitFeedbackData = {
   heading: string;
-    categories: string;
-    subCategories: string;
+    category: number;
+    subCategory: number;
     feedback: string;
 };

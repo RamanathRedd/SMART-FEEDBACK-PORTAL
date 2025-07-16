@@ -5,3 +5,28 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: #667eea;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.submit-btn:hover {
+  background: #5a67d8; 
+  transform: scale(1.05);
+}
+
+.not-allow-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
