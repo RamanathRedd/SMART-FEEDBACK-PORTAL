@@ -8,4 +8,5 @@ public class User
     public required string Password { get; set; }
     public required string Gender { get; set; }
     public bool IsAdmin { get; set; } = false;
+    public ICollection<Feedback>? Feedbacks { get; set; }
 }

@@ -24,7 +24,8 @@ namespace SmartFeedbackPortalAPI.Controllers
                 Heading = feedbackDto.Heading,
                 Category = feedbackDto.Category,
                 SubCategory = feedbackDto.SubCategory,
-                FeedbackText = feedbackDto.FeedbackText
+                FeedbackText = feedbackDto.FeedbackText,
+                UserId=2
             };
 
             _context.Feedbacks.Add(feedback);
