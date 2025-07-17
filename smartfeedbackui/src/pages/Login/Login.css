@@ -36,12 +36,11 @@ span{
   color: red;
 }
 
-
 .submit-btn,
 .not-allow-btn {
   width: 100%; 
   padding: 10px;
-  background-color: #007bff;
+  background-color: #667eea;
   color: white;
   border: none;
 }

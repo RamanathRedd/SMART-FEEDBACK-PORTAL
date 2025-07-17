@@ -51,6 +51,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
               className="btn btn-primary"
               onClick={onConfirm}
               data-bs-dismiss="modal"
+              style={{ backgroundColor: "#667eea" }}
             >
               I'Confirm
             </button>
