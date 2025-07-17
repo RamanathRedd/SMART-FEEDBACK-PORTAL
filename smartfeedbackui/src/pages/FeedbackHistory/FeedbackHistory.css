@@ -1,54 +1,67 @@
-/* Overall container for the entire app */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+.feedback-container {
+  padding: 20px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* Navbar stays at the top */
-.navbar {
-  background-color: #333;
-  color: white;
-  padding: 10px;
+.no-feedback {
   text-align: center;
-  font-size: 20px;
+  color: #888;
+  font-size: 1.2rem;
+  font-style: italic;
+  padding: 30px;
 }
 
-/* Main content area - flex to position FeedbackHistory and SubmitFeedback */
-.main-content {
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;  /* This makes sure the content takes the remaining space */
-  padding: 20px;
-}
-
-/* Feedback History component will be on the left side */
-.feedback-history {
-  width: 30%;  /* Adjust width to fit the content */
-  background-color: #f4f4f4;
-  padding: 20px;
+.feedback-card {
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 16px 20px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-/* Submit feedback component will be on the right side */
-.submit-feedback {
-  width: 30%;  /* Adjust width to fit the content */
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.feedback-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: Adjust layout for smaller screens */
-@media (max-width: 768px) {
-  .main-content {
-    flex-direction: column; /* Stack the content vertically on smaller screens */
+.feedback-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.feedback-meta {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
   }
-
-  .feedback-history,
-  .submit-feedback {
-    width: 100%; /* Full width for stacked components */
-    margin-bottom: 20px; /* Space between stacked components */
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
+
+/* Optional: Staggered animation delay */
+.feedback-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.feedback-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.feedback-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+/* ... add more if needed or use JS for dynamic delay */

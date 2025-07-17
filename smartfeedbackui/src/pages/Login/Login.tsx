@@ -9,7 +9,7 @@ import { LoginData } from "./Login.types";
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [loggedData, setLoggedData] = useState<LoginData>({
-    userName: "",
+    email: "",
     password: "",
   });
   return (
@@ -21,16 +21,16 @@ const Login: React.FC = () => {
         <div className="login-container">
           <h1 className="login-title">Login</h1>
           <form onSubmit={(e) => loggedInData(e)}>
-            <label htmlFor="username">
-              Username<span> *</span>
+            <label htmlFor="email">
+              Email<span> *</span>
             </label>
             <input
-              id="username"
-              type="text"
-              name="userName"
-              value={loggedData.userName}
+              id="email"
+              type="email"
+              name="email"
+              value={loggedData.email}
               onChange={setChanges}
-              placeholder="Enter username"
+              placeholder="Enter email"
               required
             />
 
@@ -49,6 +49,7 @@ const Login: React.FC = () => {
 
             <button
               type="submit"
+              id="submit"
               className={checkEnteredData() ? "not-allow-btn" : "submit-btn"}
               disabled={checkEnteredData()}
             >
@@ -75,9 +76,7 @@ const Login: React.FC = () => {
   }
 
   function checkEnteredData() {
-    return loggedData.password === "" || loggedData.userName === ""
-      ? true
-      : false;
+    return loggedData.password === "" || loggedData.email === "" ? true : false;
   }
 
   async function loggedInData(e: any) {
@@ -87,7 +86,7 @@ const Login: React.FC = () => {
       const response = await axios.post(
         "http://localhost:5112/api/users/login",
         {
-          Email: loggedData.userName,
+          Email: loggedData.email,
           PassWord: loggedData.password,
         }
       );
