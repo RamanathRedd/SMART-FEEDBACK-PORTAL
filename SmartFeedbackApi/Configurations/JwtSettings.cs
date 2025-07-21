@@ -1,8 +1,10 @@
-// JwtSettings.cs
-public class JwtSettings
+namespace SmartFeedbackPortalAPI.Configurations
 {
-    public string SecretKey { get; set; }
-    public string Issuer { get; set; }
-    public string Audience { get; set; }
-    public int ExpirationMinutes { get; set; }
+    public class JwtSettings
+    {
+        public string SecretKey { get; set; }
+        public string Issuer { get; set; }
+        public string Audience { get; set; }
+        public int ExpirationMinutes { get; set; }
+    }
 }

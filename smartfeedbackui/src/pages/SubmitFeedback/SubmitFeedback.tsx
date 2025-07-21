@@ -41,6 +41,74 @@ const SubmitFeedback: React.FC = () => {
     subCategory: "",
     feedback: "",
   });
+  const token = localStorage.getItem("jwtToken");
+
+  function submittedFeedback(e: any) {
+    e.preventDefault();
+    const displayData = {
+      heading: feedbackData.heading,
+      category:
+        categories.find((item) => item.id === Number(feedbackData.category))
+          ?.name || "",
+      subCategory:
+        subCategories[Number(feedbackData.category)]?.find(
+          (item) => item.id === Number(feedbackData.subCategory)
+        )?.name || "",
+      feedback: feedbackData.feedback,
+    };
+    setMappedFeedbackData({
+      category: displayData.category,
+      subCategory: displayData.subCategory,
+      feedback: displayData.feedback,
+    });
+    const modalElement = document.getElementById("confirmationModal");
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  async function confirmedFeedback() {
+    try {
+      await axios.post(
+        "http://localhost:5112/api/feedback",
+        {
+          ...feedbackData,
+          FeedbackText: feedbackData.feedback,
+          category: mappedFeedbackData.category,
+          subCategory: mappedFeedbackData.subCategory,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFeedbackData({
+        heading: "",
+        category: -1,
+        subCategory: -1,
+        feedback: "",
+      });
+      toast.success("Feedback submitted successful! 🎉");
+    } catch (error: any) {
+      toast.error("Something went wrong. Please try again.");
+    }
+  }
+
+  function checkEnteredData() {
+    return (
+      feedbackData.heading === "" ||
+      feedbackData.category === -1 ||
+      feedbackData.subCategory === -1 ||
+      feedbackData.feedback === ""
+    );
+  }
+
+  function setChanges(e: any) {
+    const { name, value } = e.target;
+    setFeedbackData({ ...feedbackData, [name]: value });
+  }
 
   return (
     <>
@@ -120,65 +188,6 @@ const SubmitFeedback: React.FC = () => {
       />
     </>
   );
-
-  function submittedFeedback(e: any) {
-    e.preventDefault();
-    const displayData = {
-      heading: feedbackData.heading,
-      category:
-        categories.find((item) => item.id === Number(feedbackData.category))
-          ?.name || "",
-      subCategory:
-        subCategories[Number(feedbackData.category)]?.find(
-          (item) => item.id === Number(feedbackData.subCategory)
-        )?.name || "",
-      feedback: feedbackData.feedback,
-    };
-    setMappedFeedbackData({
-      category: displayData.category,
-      subCategory: displayData.subCategory,
-      feedback: displayData.feedback,
-    });
-    const modalElement = document.getElementById("confirmationModal");
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
-  }
-
-  async function confirmedFeedback() {
-    try {
-      await axios.post("http://localhost:5112/api/feedback", {
-        ...feedbackData,
-        FeedbackText: feedbackData.feedback,
-        category: mappedFeedbackData.category,
-        subCategory: mappedFeedbackData.subCategory,
-      });
-      setFeedbackData({
-        heading: "",
-        category: -1,
-        subCategory: -1,
-        feedback: "",
-      });
-      toast.success("Feedback submitted successful! 🎉");
-    } catch (error: any) {
-      toast.error("Something went wrong. Please try again.");
-    }
-  }
-
-  function checkEnteredData() {
-    return (
-      feedbackData.heading === "" ||
-      feedbackData.category === -1 ||
-      feedbackData.subCategory === -1 ||
-      feedbackData.feedback === ""
-    );
-  }
-
-  function setChanges(e: any) {
-    const { name, value } = e.target;
-    setFeedbackData({ ...feedbackData, [name]: value });
-  }
 };
 
 export default SubmitFeedback;

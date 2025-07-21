@@ -15,6 +15,44 @@ const Register: React.FC = () => {
     confirm_password: "",
   });
 
+  function login() {
+    navigate("/login");
+  }
+
+  function checkEnteredData() {
+    return registerData.name === "" ||
+      registerData.gender === "" ||
+      registerData.email === "" ||
+      registerData.password === "" ||
+      registerData.confirm_password === "" ||
+      registerData.password !== registerData.confirm_password
+      ? true
+      : false;
+  }
+
+  async function registeredData(e: any) {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:5112/api/users/register",
+        registerData
+      );
+      toast.success("Registration successful! 🎉");
+      login();
+    } catch (error: any) {
+      if (error.response?.status === 400) {
+        toast.error("User already exists or invalid data.");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
+    }
+  }
+
+  function setChanges(e: any) {
+    const { name, value } = e.target;
+    setRegisterData({ ...registerData, [name]: value });
+  }
+
   return (
     <>
       <div className="register">
@@ -118,44 +156,6 @@ const Register: React.FC = () => {
       </div>
     </>
   );
-
-  function login() {
-    navigate("/login");
-  }
-
-  function checkEnteredData() {
-    return registerData.name === "" ||
-      registerData.gender === "" ||
-      registerData.email === "" ||
-      registerData.password === "" ||
-      registerData.confirm_password === "" ||
-      registerData.password !== registerData.confirm_password
-      ? true
-      : false;
-  }
-
-  async function registeredData(e: any) {
-    e.preventDefault();
-    try {
-      await axios.post(
-        "http://localhost:5112/api/users/register",
-        registerData
-      );
-      toast.success("Registration successful! 🎉");
-      login();
-    } catch (error: any) {
-      if (error.response?.status === 400) {
-        toast.error("User already exists or invalid data.");
-      } else {
-        toast.error("Registration failed. Please try again.");
-      }
-    }
-  }
-
-  function setChanges(e: any) {
-    const { name, value } = e.target;
-    setRegisterData({ ...registerData, [name]: value });
-  }
 };
 
 export default Register;

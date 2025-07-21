@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using SmartFeedbackPortalAPI.Configurations;
 
 namespace SmartFeedbackPortalAPI.Controllers
 {
@@ -16,9 +19,10 @@ namespace SmartFeedbackPortalAPI.Controllers
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -49,18 +53,21 @@ namespace SmartFeedbackPortalAPI.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
             if (user == null)
                 return NotFound("User Not Found");
+
             var hashedPassword = HashPassword(loginDto.Password);
             if (hashedPassword != user.Password)
-            {
                 return Unauthorized("Invalid credentials");
-            }
+
+            var token = GenerateJwtToken(user);
 
             return Ok(new
             {
                 message = "Login successful",
+                token,
                 user = new { user.Id, user.Name, user.Email }
             });
         }
+
 
         public string GenerateJwtToken(User user)
         {
@@ -71,7 +78,6 @@ namespace SmartFeedbackPortalAPI.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
-                // Add other claims if necessary
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
