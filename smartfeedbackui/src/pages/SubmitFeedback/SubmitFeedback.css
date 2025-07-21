@@ -1,5 +1,5 @@
 .submit-feedback {
-  width: 50%;  
+  /* width: 50%;   */
   background-color: #f4f4f4;
   padding: 20px;
   border-radius: 8px;
@@ -8,16 +8,18 @@
 
 .submit-btn {
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   padding: 12px;
   background: #667eea;
-  border: none;
+  /* border: none; */
   border-radius: 10px;
   color: white;
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
+
+  width: 100%;
 }
 
 .submit-btn:hover {

@@ -12,6 +12,44 @@ const Login: React.FC = () => {
     email: "",
     password: "",
   });
+
+  function register() {
+    navigate("/register");
+  }
+
+  function setChanges(e: any) {
+    const { name, value } = e.target;
+    setLoggedData({ ...loggedData, [name]: value });
+  }
+
+  function checkEnteredData() {
+    return loggedData.password === "" || loggedData.email === "" ? true : false;
+  }
+
+  async function loggedInData(e: any) {
+    e.preventDefault();
+    console.log("loggedData", loggedData);
+    try {
+      const response = await axios.post(
+        "http://localhost:5112/api/users/login",
+        {
+          Email: loggedData.email,
+          PassWord: loggedData.password,
+        }
+      );
+      toast.success("Login successful! 🎉");
+      navigate("/home");
+      console.log(response);
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        toast.error("User not found. Please register first.");
+      } else if (error.response?.status === 401) {
+        toast.error("Invalid credentials. Please try again.");
+      } else {
+        toast.error("Something went wrong. Please try later.");
+      }
+    }
+  }
   return (
     <>
       <div className="login">
@@ -65,44 +103,6 @@ const Login: React.FC = () => {
       </div>
     </>
   );
-
-  function register() {
-    navigate("/register");
-  }
-
-  function setChanges(e: any) {
-    const { name, value } = e.target;
-    setLoggedData({ ...loggedData, [name]: value });
-  }
-
-  function checkEnteredData() {
-    return loggedData.password === "" || loggedData.email === "" ? true : false;
-  }
-
-  async function loggedInData(e: any) {
-    e.preventDefault();
-    console.log("loggedData", loggedData);
-    try {
-      const response = await axios.post(
-        "http://localhost:5112/api/users/login",
-        {
-          Email: loggedData.email,
-          PassWord: loggedData.password,
-        }
-      );
-      toast.success("Login successful! 🎉");
-      navigate("/home");
-      console.log(response);
-    } catch (error: any) {
-      if (error.response?.status === 404) {
-        toast.error("User not found. Please register first.");
-      } else if (error.response?.status === 401) {
-        toast.error("Invalid credentials. Please try again.");
-      } else {
-        toast.error("Something went wrong. Please try later.");
-      }
-    }
-  }
 };
 
 export default Login;

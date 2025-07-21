@@ -44,8 +44,8 @@ const SubmitFeedback: React.FC = () => {
 
   return (
     <>
-      <div className="submit-feedback">
-        <h2>Submit Feedback</h2>
+      <div className="submit-feedback-container">
+        <h5>Submit Feedback</h5>
         <form onSubmit={(e) => submittedFeedback(e)}>
           <label htmlFor="heading">
             Feedback Heading<span> *</span>
