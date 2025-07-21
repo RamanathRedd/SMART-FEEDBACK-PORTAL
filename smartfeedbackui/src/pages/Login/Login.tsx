@@ -28,7 +28,6 @@ const Login: React.FC = () => {
 
   async function loggedInData(e: any) {
     e.preventDefault();
-    console.log("loggedData", loggedData);
     try {
       const response = await axios.post(
         "http://localhost:5112/api/users/login",
@@ -37,9 +36,9 @@ const Login: React.FC = () => {
           PassWord: loggedData.password,
         }
       );
+      localStorage.setItem("jwtToken", response.data.token);
       toast.success("Login successful! 🎉");
       navigate("/home");
-      console.log(response);
     } catch (error: any) {
       if (error.response?.status === 404) {
         toast.error("User not found. Please register first.");

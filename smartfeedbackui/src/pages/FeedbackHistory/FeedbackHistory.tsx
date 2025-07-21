@@ -7,10 +7,23 @@ const FeedbackHistory: React.FC = () => {
   useEffect(() => {
     fetchFeedbacks();
   }, []);
+  const token = localStorage.getItem("jwtToken");
 
   async function fetchFeedbacks() {
-    const response = await axios.get("http://localhost:5112/api/feedback");
-    setFeedbacks(response.data);
+    try {
+      const response = await axios.get("http://localhost:5112/api/feedback", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 404) {
+        setFeedbacks([]);
+      } else {
+        setFeedbacks(response.data);
+      }
+    } catch (error) {
+      console.log("Get feedbacks Error: ", error);
+    }
   }
 
   return (
