@@ -3,11 +3,12 @@ import "./AppNavbar.css";
 
 const AppNavbar: React.FC = () => {
   return (
-    <>
-      <div>
-        <h1>navbar</h1>
+    <div className="navbar">
+      <div className="navbar-center">SmartFeedback Portal</div>
+      <div className="navbar-right">
+        <i className="bi bi-person-circle"></i>
       </div>
-    </>
+    </div>
   );
 };
 

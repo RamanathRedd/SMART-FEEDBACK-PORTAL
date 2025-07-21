@@ -6,7 +6,7 @@ const FeedbackHistory: React.FC = () => {
   const [feedbacks, setFeedbacks] = useState<any[]>([]);
   useEffect(() => {
     fetchFeedbacks();
-  });
+  }, []);
 
   async function fetchFeedbacks() {
     const response = await axios.get("http://localhost:5112/api/feedback");

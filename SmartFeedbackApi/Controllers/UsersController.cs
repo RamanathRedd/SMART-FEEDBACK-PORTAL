@@ -5,6 +5,7 @@ using SmartFeedbackPortalAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using System.Security.Claims;
 
 namespace SmartFeedbackPortalAPI.Controllers
 {
@@ -13,6 +14,7 @@ namespace SmartFeedbackPortalAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
         public UsersController(AppDbContext context)
         {
@@ -59,6 +61,33 @@ namespace SmartFeedbackPortalAPI.Controllers
                 user = new { user.Id, user.Name, user.Email }
             });
         }
+
+        public string GenerateJwtToken(User user)
+        {
+            var jwtSettings = _configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                // Add other claims if necessary
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings.Issuer,
+                audience: jwtSettings.Audience,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(jwtSettings.ExpirationMinutes),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
 
         private string HashPassword(string password)
         {

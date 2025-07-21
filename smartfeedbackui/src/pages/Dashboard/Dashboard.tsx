@@ -1,15 +1,17 @@
 import React from "react";
-import AppNavbar from "../AppNavbar/AppNavbar";
 import FeedbackHistory from "../FeedbackHistory/FeedbackHistory";
 import SubmitFeedback from "../SubmitFeedback/SubmitFeedback";
+import AppNavbar from "../AppNavbar/AppNavbar";
 
 const Dashboard: React.FC = () => {
   return (
     <>
-      <div className="app-container">
-        <div className="navbar">App Navbar</div>
-        <div className="main-content">
+      <AppNavbar />
+      <div className="dashboard-container">
+        <div className="feedback-history">
           <FeedbackHistory />
+        </div>
+        <div className="submit-feedback">
           <SubmitFeedback />
         </div>
       </div>
