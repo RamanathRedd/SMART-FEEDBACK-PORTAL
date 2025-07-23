@@ -37,6 +37,7 @@ const Login: React.FC = () => {
         }
       );
       localStorage.setItem("jwtToken", response.data.token);
+      localStorage.setItem("loggedData", JSON.stringify(response.data.user));
       toast.success("Login successful! 🎉");
       navigate("/home");
     } catch (error: any) {

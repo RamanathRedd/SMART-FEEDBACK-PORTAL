@@ -64,7 +64,7 @@ namespace SmartFeedbackPortalAPI.Controllers
             {
                 message = "Login successful",
                 token,
-                user = new { user.Id, user.Name, user.Email }
+                user = new { user.Id, user.Name, user.Email, user.IsAdmin }
             });
         }
 
@@ -78,6 +78,7 @@ namespace SmartFeedbackPortalAPI.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.IsAdmin?"Admin":"User")
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));

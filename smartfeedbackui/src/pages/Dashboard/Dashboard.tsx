@@ -1,20 +1,36 @@
-import React from "react";
-import FeedbackHistory from "../FeedbackHistory/FeedbackHistory";
+import React, { useEffect, useState } from "react";
 import SubmitFeedback from "../SubmitFeedback/SubmitFeedback";
 import AppNavbar from "../AppNavbar/AppNavbar";
+import FeedbackHistoryAdmin from "../FeedbackHistoryAdmin/FeedbackHistoryAdmin";
+import FeedbackHistory from "../FeedbackHistory/FeedbackHistory";
 
 const Dashboard: React.FC = () => {
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    const tempUser = localStorage.getItem("loggedData");
+    setRole(JSON.parse(tempUser ? tempUser : "").isAdmin ? "Admin" : "User");
+  }, []);
+
   return (
     <>
       <AppNavbar />
-      <div className="dashboard-container">
-        <div className="feedback-history">
-          <FeedbackHistory />
+      {role == "User" && (
+        <div className="dashboard-container">
+          <div className="feedback-history">
+            <FeedbackHistory />
+          </div>
+          <div className="submit-feedback">
+            <SubmitFeedback />
+          </div>
         </div>
-        <div className="submit-feedback">
-          <SubmitFeedback />
+      )}
+      {role == "Admin" && (
+        <div className="dashboard-container">
+          <div className="feedback-history">
+            <FeedbackHistoryAdmin />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

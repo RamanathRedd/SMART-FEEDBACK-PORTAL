@@ -6,11 +6,16 @@ const AppNavbar: React.FC = () => {
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState<any>({});
 
   const handleIconClick = () => {
     setShowPopover((prev) => !prev);
   };
   useEffect(() => {
+    const tempUser = localStorage.getItem("loggedData");
+    if (tempUser) {
+      setUser(JSON.parse(tempUser));
+    }
     function handleClickOutside(event: MouseEvent) {
       if (
         popoverRef.current &&
@@ -38,10 +43,10 @@ const AppNavbar: React.FC = () => {
         {showPopover && (
           <div className="popover" ref={popoverRef}>
             <p>
-              <strong>Username:</strong> John Doe
+              <strong>Username:</strong> {user.name}
             </p>
             <p>
-              <strong>Email:</strong> john@example.com
+              <strong>Email:</strong> {user.email}
             </p>
             <button className="logout-button" onClick={logout}>
               Logout

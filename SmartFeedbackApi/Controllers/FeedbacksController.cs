@@ -43,7 +43,8 @@ namespace SmartFeedbackPortalAPI.Controllers
             return Ok(new { message = "Feedback submitted successfully." });
         }
 
-        [HttpGet]
+        [HttpGet("user")]
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> GetUserFeedbacks()
         {
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
@@ -59,6 +60,21 @@ namespace SmartFeedbackPortalAPI.Controllers
             if (feedbacks == null || feedbacks.Count == 0)
             {
                 return NotFound(new { message = "No feedbacks found for the user." });
+            }
+
+            return Ok(feedbacks);
+
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllFeedbacks()
+        {
+            var feedbacks = await _context.Feedbacks.ToListAsync();
+            Console.WriteLine(feedbacks);
+            if (feedbacks == null || feedbacks.Count == 0)
+            {
+                return NotFound(new { message = "No feedbacks found." });
             }
 
             return Ok(feedbacks);
