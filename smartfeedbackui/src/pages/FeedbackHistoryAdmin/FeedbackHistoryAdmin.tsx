@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./FeedbackHistory.css";
 
-const FeedbackHistory: React.FC = () => {
+const FeedbackHistoryAdmin: React.FC = () => {
   const [feedbacks, setFeedbacks] = useState<any[]>([]);
   useEffect(() => {
     fetchFeedbacks();
@@ -11,14 +10,11 @@ const FeedbackHistory: React.FC = () => {
 
   async function fetchFeedbacks() {
     try {
-      const response = await axios.get(
-        "http://localhost:5112/api/feedback/user",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:5112/api/feedback", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.status === 404) {
         setFeedbacks([]);
       } else {
@@ -49,4 +45,4 @@ const FeedbackHistory: React.FC = () => {
   );
 };
 
-export default FeedbackHistory;
+export default FeedbackHistoryAdmin;
