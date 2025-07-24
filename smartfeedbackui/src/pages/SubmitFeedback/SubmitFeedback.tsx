@@ -4,6 +4,7 @@ import axios from "axios";
 import { Modal } from "bootstrap";
 import ConfirmationModal from "../../common/modals/ConfirmationModal";
 import { toast } from "react-toastify";
+import "./SubmitFeedback.css";
 
 const SubmitFeedback: React.FC = () => {
   const categories = [
@@ -61,6 +62,7 @@ const SubmitFeedback: React.FC = () => {
       subCategory: displayData.subCategory,
       feedback: displayData.feedback,
     });
+    console.log("came");
     const modalElement = document.getElementById("confirmationModal");
     if (modalElement) {
       const modal = new Modal(modalElement);
@@ -112,11 +114,11 @@ const SubmitFeedback: React.FC = () => {
 
   return (
     <>
-      <div className="submit-feedback-container">
+      <div className="submit-form-wrapper">
         <h5>Submit Feedback</h5>
         <form onSubmit={(e) => submittedFeedback(e)}>
           <label htmlFor="heading">
-            Feedback Heading<span> *</span>
+            Feedback Heading<span className="required-symbol"> *</span>
           </label>
           <input
             type="text"
@@ -128,7 +130,7 @@ const SubmitFeedback: React.FC = () => {
             required
           ></input>
           <label htmlFor="category">
-            Feedback Category<span> *</span>
+            Feedback Category<span className="required-symbol"> *</span>
           </label>
           <select
             name="category"
@@ -144,7 +146,7 @@ const SubmitFeedback: React.FC = () => {
             ))}
           </select>
           <label htmlFor="subCategory">
-            Feedback Subcategory<span> *</span>
+            Feedback Subcategory<span className="required-symbol"> *</span>
           </label>
           <select
             name="subCategory"
@@ -162,7 +164,7 @@ const SubmitFeedback: React.FC = () => {
               ))}
           </select>
           <label htmlFor="feedback">
-            Feedback<span> *</span>
+            Feedback<span className="required-symbol"> *</span>
           </label>
           <input
             type="text"

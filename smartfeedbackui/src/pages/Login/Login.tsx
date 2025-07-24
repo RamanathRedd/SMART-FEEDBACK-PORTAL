@@ -60,7 +60,7 @@ const Login: React.FC = () => {
           <h1 className="login-title">Login</h1>
           <form onSubmit={(e) => loggedInData(e)}>
             <label htmlFor="email">
-              Email<span> *</span>
+              Email<span className="required-symbol"> *</span>
             </label>
             <input
               id="email"
@@ -73,7 +73,7 @@ const Login: React.FC = () => {
             />
 
             <label htmlFor="password">
-              Password<span> *</span>
+              Password<span className="required-symbol"> *</span>
             </label>
             <input
               id="password"

@@ -37,9 +37,27 @@ const AppNavbar: React.FC = () => {
 
   return (
     <div className="navbar">
-      <div className="navbar-center">SmartFeedback Portal</div>
+      <div className="navbar-left">
+        <span className="navbar-title">SmartFeedback Portal</span>
+      </div>
+
+      <div className="navbar-center">
+        <span className="nav-link submit" onClick={() => navigate("/home")}>
+          Submit
+        </span>
+        <span
+          className="nav-link history"
+          onClick={() => navigate("/home/feedback-history")}
+        >
+          History
+        </span>
+      </div>
+
       <div className="navbar-right">
-        <i className="bi bi-person-circle" onClick={handleIconClick}></i>
+        <i
+          className="bi bi-person-circle user-icon"
+          onClick={handleIconClick}
+        ></i>
         {showPopover && (
           <div className="popover" ref={popoverRef}>
             <p>
