@@ -1,30 +1,64 @@
 .dashboard-container {
   display: flex;
-  justify-content: space-between; /* Space between items */
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
   padding: 20px;
-  margin-top: 80px; /* Adjust for Navbar height */
-  gap: 20px; /* Adds gap between the two columns */
+  flex-wrap: wrap;
 }
 
 .feedback-history {
-  flex: 1; /* This allows FeedbackHistory to take up remaining space */
-  margin-right: 20px; /* Space between FeedbackHistory and SubmitFeedback */
+  flex: 1;
+  min-width: 300px;
+  animation: slideInLeft 0.5s ease-in-out;
 }
 
 .submit-feedback {
-  flex: 1; /* This allows SubmitFeedback to take up remaining space */
-  margin-left: 20px; /* Space between SubmitFeedback and FeedbackHistory */
+  flex: 1;
+  min-width: 300px;
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.feedback-history,
+.submit-feedback {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 768px) {
   .dashboard-container {
-    flex-direction: column; /* Stack vertically on smaller screens */
-    align-items: center; /* Center items horizontally */
+    flex-direction: column;
   }
 
   .feedback-history,
   .submit-feedback {
-    width: 90%;  /* Ensure both components take up full width on small screens */
-    margin: 10px 0; /* Add some margin between the stacked elements */
+    width: 100%;
+    animation: none; /* Optional: remove animation on small screens */
   }
 }
