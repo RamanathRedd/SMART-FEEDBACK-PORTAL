@@ -61,7 +61,7 @@ const Register: React.FC = () => {
 
           <form onSubmit={registeredData}>
             <label htmlFor="username">
-              Username<span> *</span>
+              Username<span className="required-symbol"> *</span>
             </label>
             <input
               id="username"
@@ -74,7 +74,7 @@ const Register: React.FC = () => {
             />
 
             <label htmlFor="gender">
-              Gender<span> *</span>
+              Gender<span className="required-symbol"> *</span>
             </label>
             <select
               name="gender"
@@ -87,7 +87,7 @@ const Register: React.FC = () => {
             </select>
 
             <label htmlFor="email">
-              Email<span> *</span>
+              Email<span className="required-symbol"> *</span>
             </label>
             <input
               id="email"
@@ -100,7 +100,7 @@ const Register: React.FC = () => {
             />
 
             <label htmlFor="password">
-              Password<span> *</span>
+              Password<span className="required-symbol"> *</span>
             </label>
             <input
               id="password"
@@ -113,7 +113,7 @@ const Register: React.FC = () => {
             />
 
             <label htmlFor="confirm-password">
-              Confirm Password<span> *</span>
+              Confirm Password<span className="required-symbol"> *</span>
             </label>
             <input
               id="confirm-password"

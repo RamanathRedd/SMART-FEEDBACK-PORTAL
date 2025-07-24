@@ -3,6 +3,7 @@ import SubmitFeedback from "../SubmitFeedback/SubmitFeedback";
 import AppNavbar from "../AppNavbar/AppNavbar";
 import FeedbackHistoryAdmin from "../FeedbackHistoryAdmin/FeedbackHistoryAdmin";
 import FeedbackHistory from "../FeedbackHistory/FeedbackHistory";
+import { Route, Routes } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const [role, setRole] = useState("");
@@ -14,21 +15,15 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <AppNavbar />
-      {role == "User" && (
-        <div className="dashboard-container">
-          <div className="feedback-history">
-            <FeedbackHistory />
-          </div>
-          <div className="submit-feedback">
-            <SubmitFeedback />
-          </div>
-        </div>
+      {role === "User" && (
+        <Routes>
+          <Route path="" element={<SubmitFeedback />} />
+          <Route path="feedback-history" element={<FeedbackHistory />} />
+        </Routes>
       )}
       {role == "Admin" && (
-        <div className="dashboard-container">
-          <div className="feedback-history">
-            <FeedbackHistoryAdmin />
-          </div>
+        <div className="feedback-history">
+          <FeedbackHistoryAdmin />
         </div>
       )}
     </>

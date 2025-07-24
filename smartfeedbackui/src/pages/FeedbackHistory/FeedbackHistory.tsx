@@ -6,6 +6,7 @@ const FeedbackHistory: React.FC = () => {
   const [feedbacks, setFeedbacks] = useState<any[]>([]);
   useEffect(() => {
     fetchFeedbacks();
+    console.log("camne");
   }, []);
   const token = localStorage.getItem("jwtToken");
 

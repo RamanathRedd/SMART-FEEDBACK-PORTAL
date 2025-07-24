@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import SubmitFeedback from "../pages/SubmitFeedback/SubmitFeedback";
+import FeedbackHistory from "../pages/FeedbackHistory/FeedbackHistory";
 
 const AppRoutes: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -16,11 +18,11 @@ const AppRoutes: React.FC = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
-        path="/home"
+        path="/home/*"
         element={<Dashboard />}
         // element={token ? <Dashboard /> : <Navigate to="/login" replace />}
       />
-      <Route path="*" element={<Login />} />
+      {/* <Route path="*" element={<Login />} /> */}
     </Routes>
   );
 };
