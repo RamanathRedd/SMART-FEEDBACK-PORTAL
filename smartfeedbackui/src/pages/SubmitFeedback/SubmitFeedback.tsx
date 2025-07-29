@@ -32,7 +32,6 @@ const SubmitFeedback: React.FC = () => {
     4: [{ id: 10, name: "Other" }],
   };
   const [feedbackData, setFeedbackData] = useState<SubmitFeedbackData>({
-    heading: "",
     category: -1,
     subCategory: -1,
     feedback: "",
@@ -47,7 +46,6 @@ const SubmitFeedback: React.FC = () => {
   function submittedFeedback(e: any) {
     e.preventDefault();
     const displayData = {
-      heading: feedbackData.heading,
       category:
         categories.find((item) => item.id === Number(feedbackData.category))
           ?.name || "",
@@ -87,7 +85,6 @@ const SubmitFeedback: React.FC = () => {
         }
       );
       setFeedbackData({
-        heading: "",
         category: -1,
         subCategory: -1,
         feedback: "",
@@ -100,7 +97,6 @@ const SubmitFeedback: React.FC = () => {
 
   function checkEnteredData() {
     return (
-      feedbackData.heading === "" ||
       feedbackData.category === -1 ||
       feedbackData.subCategory === -1 ||
       feedbackData.feedback === ""
@@ -115,20 +111,7 @@ const SubmitFeedback: React.FC = () => {
   return (
     <>
       <div className="submit-form-wrapper">
-        <h5>Submit Feedback</h5>
         <form onSubmit={(e) => submittedFeedback(e)}>
-          <label htmlFor="heading">
-            Feedback Heading<span className="required-symbol"> *</span>
-          </label>
-          <input
-            type="text"
-            id="heading"
-            name="heading"
-            value={feedbackData.heading}
-            onChange={setChanges}
-            placeholder="Enter Heading"
-            required
-          ></input>
           <label htmlFor="category">
             Feedback Category<span className="required-symbol"> *</span>
           </label>

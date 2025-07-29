@@ -30,7 +30,6 @@ namespace SmartFeedbackPortalAPI.Controllers
             int userId = int.Parse(userIdClaim.Value);
             var feedback = new Feedback
             {
-                Heading = feedbackDto.Heading,
                 Category = feedbackDto.Category,
                 SubCategory = feedbackDto.SubCategory,
                 FeedbackText = feedbackDto.FeedbackText,

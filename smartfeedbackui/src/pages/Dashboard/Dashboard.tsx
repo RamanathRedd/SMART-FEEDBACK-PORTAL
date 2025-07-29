@@ -16,10 +16,13 @@ const Dashboard: React.FC = () => {
     <>
       <AppNavbar />
       {role === "User" && (
-        <Routes>
-          <Route path="" element={<SubmitFeedback />} />
-          <Route path="feedback-history" element={<FeedbackHistory />} />
-        </Routes>
+        <div className="feedback-history">
+          <FeedbackHistory />
+        </div>
+        // <Route path="feedback-history" element={<FeedbackHistory />} />
+        // <Routes>
+        //   <Route path="" element={<SubmitFeedback />} />
+        // </Routes>
       )}
       {role == "Admin" && (
         <div className="feedback-history">
