@@ -41,7 +41,7 @@ const AppNavbar: React.FC = () => {
         <span className="navbar-title">SmartFeedback Portal</span>
       </div>
 
-      <div className="navbar-center">
+      {/* <div className="navbar-center">
         <span className="nav-link submit" onClick={() => navigate("/home")}>
           Submit
         </span>
@@ -51,7 +51,7 @@ const AppNavbar: React.FC = () => {
         >
           History
         </span>
-      </div>
+      </div> */}
 
       <div className="navbar-right">
         <i
